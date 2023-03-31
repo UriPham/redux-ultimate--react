@@ -68,6 +68,7 @@ function TableUser(props) {
                         <td>
                           <button
                             className='btn btn-warning'
+                            style={{ marginRight: "10px" }}
                           >Edit</button>
                           <button
                             className='btn btn-danger'
