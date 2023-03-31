@@ -4,10 +4,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import { useEffect } from 'react';
 import logo from './logo.svg';
-import './App.css';
+// import './App.css';
+import Home from './components/Home';
 
 function App(props) {
-  
+
   console.log(props)
 
   const newCount = useSelector((state) => {
@@ -27,15 +28,16 @@ function App(props) {
 
   const dispatch = useDispatch()
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1>Hello world with React and Hoi Dan IT!</h1>
-        <div>Count: {newCount}</div>
-        <button onClick={() => dispatch(increaseCounter())}>Increase Count</button>
-        <button onClick={() => dispatch(decreaseCounter())}>Decrease Count</button>
-      </header>
-    </div>
+    // <div className="App">
+    //   <header className="App-header">
+    //     <img src={logo} className="App-logo" alt="logo" />
+    //     <h1>Hello world with React and Hoi Dan IT!</h1>
+    //     <div>Count: {newCount}</div>
+    //     <button onClick={() => dispatch(increaseCounter())}>Increase Count</button>
+    //     <button onClick={() => dispatch(decreaseCounter())}>Decrease Count</button>
+    //   </header>
+    // </div>
+    <Home></Home>
   );
 }
 
