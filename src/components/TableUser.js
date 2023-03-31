@@ -3,7 +3,7 @@ import Table from 'react-bootstrap/Table';
 // import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAllUsers } from '../action/actions';
+import { fetchAllUsers, deleteUserRedux } from '../action/actions';
 
 function TableUser(props) {
 
@@ -13,6 +13,7 @@ function TableUser(props) {
   const isLoading = useSelector(state => state.user.isLoading)
   const isError = useSelector(state => state.user.isError)
 
+  const isDeleting = useSelector(state => state.user.isDeleting)
 
   // console.log(listUsers)
 
@@ -30,7 +31,7 @@ function TableUser(props) {
   }, [])
 
   const handleDeleteUser = (user) => {
-    // console.log(user)
+    dispatch(deleteUserRedux(user.id))
   }
 
   return (
@@ -48,13 +49,13 @@ function TableUser(props) {
         <tbody>
           {isError ?
             <>
-              <div>Something wrongs, please try again...</div>
+              <tr>Something wrongs, please try again...</tr>
             </>
             :
             <>
               {isLoading ?
                 <>
-                  <div>Loading data...</div>
+                  <tr>Loading data...</tr>
                 </>
                 :
                 <>
@@ -71,6 +72,7 @@ function TableUser(props) {
                           <button
                             className='btn btn-danger'
                             onClick={() => handleDeleteUser(user)}
+                            disabled={isDeleting}
                           >Delete</button>
                         </td>
                       </tr>
