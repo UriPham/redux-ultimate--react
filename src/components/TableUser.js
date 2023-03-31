@@ -10,7 +10,11 @@ function TableUser(props) {
   // const [listUsers, setListUsers] = useState()
   const dispatch = useDispatch()
   const listUsers = useSelector(state => state.user.listUsers)
-  console.log(listUsers)
+  const isLoading = useSelector(state => state.user.isLoading)
+  const isError = useSelector(state => state.user.isError)
+
+
+  // console.log(listUsers)
 
   // const fetchAllUsers = async () => {
   //   let res = await axios.get('http://localhost:8080/users/all')
@@ -26,7 +30,7 @@ function TableUser(props) {
   }, [])
 
   const handleDeleteUser = (user) => {
-    console.log(user)
+    // console.log(user)
   }
 
   return (
@@ -42,24 +46,40 @@ function TableUser(props) {
           </tr>
         </thead>
         <tbody>
-          {listUsers && listUsers.length > 0 && listUsers.map((user, index) => {
-            return (
-              <tr key={`user-${index}`}>
-                <td>{user.id}</td>
-                <td>{user.email}</td>
-                <td>{user.username}</td>
-                <td>
-                  <button
-                    className='btn btn-warning'
-                  >Edit</button>
-                  <button
-                    className='btn btn-danger'
-                    onClick={() => handleDeleteUser(user)}
-                  >Delete</button>
-                </td>
-              </tr>
-            )
-          })}
+          {isError ?
+            <>
+              <div>Something wrongs, please try again...</div>
+            </>
+            :
+            <>
+              {isLoading ?
+                <>
+                  <div>Loading data...</div>
+                </>
+                :
+                <>
+                  {listUsers && listUsers.length > 0 && listUsers.map((user, index) => {
+                    return (
+                      <tr key={`user-${index}`}>
+                        <td>{user.id}</td>
+                        <td>{user.email}</td>
+                        <td>{user.username}</td>
+                        <td>
+                          <button
+                            className='btn btn-warning'
+                          >Edit</button>
+                          <button
+                            className='btn btn-danger'
+                            onClick={() => handleDeleteUser(user)}
+                          >Delete</button>
+                        </td>
+                      </tr>
+                    )
+                  })}
+                </>
+              }
+            </>
+          }
         </tbody>
       </Table>
     </Container>

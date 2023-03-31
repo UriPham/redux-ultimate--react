@@ -46,7 +46,7 @@ export const fetchUsersRequest = () => {
 }
 
 export const fetchUsersSuccess = (data) => {
-  console.log(data)
+  // console.log(data)
   return {
     type: FETCH_USER_SUCCESS,
     data
